@@ -1,3 +1,6 @@
+Names: Zack Soucek. Luke Rowe, William Woodward
+Status: Complete
+
 # cpe315-lab3
 Lab 3 Starter Code
 
