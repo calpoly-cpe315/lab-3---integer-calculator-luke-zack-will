@@ -24,7 +24,7 @@ mainloop:
     ldr     w0, =scanint
     mov     x1, sp          // Save stack pointer to x1, you must create space
     bl      scanf           // Scan user's answer
-    ldrb    w19, [sp]
+    ldrb    w20, [sp]
     //read 2nd num
     //prompt for operation
     //read operation
