@@ -37,8 +37,14 @@ mainloop:
     bl printf
     //read operation
 
+    ldr     w0, =scanchar
+    mov     x1, sp          // Save stack pointer to x1, you must create space
+    bl      scanf           // Scan user's answer
+    ldrb    w21, [sp]
 
-    //do calculation
+
+
+    //do calculation, gonna have 4 diff beq's i assume
 
     //prompt again
     ldr w0, printdata + 16
