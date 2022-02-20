@@ -10,7 +10,7 @@ stp x29, x30, [sp, -32] // probably can remove
 
 loop:
 
-xor x21, x0, x1 // xor, for digits left
+eor x21, x0, x1 // xor, for digits left
 
 mov x20, x1 // stores prev and, which is the result in the final iteration (magic)
 and x1, x0, x1 // and, for carry digits
