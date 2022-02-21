@@ -24,7 +24,7 @@ loop:
     mov x22, x1 // orig in 22
     mov x1, x23 // make x1 have iterations
     mov x2, #1 // decrement by one
-    bl sub
+    bl intsub
 
     cmp x23, #0 // is it done?
     bne loop // if not loop
