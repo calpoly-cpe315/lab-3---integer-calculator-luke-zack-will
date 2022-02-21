@@ -19,7 +19,7 @@ lsl x1, x1, #1 // logical shift left to move the carry
 cmp x1, #0 // if there are carries
 bne loop // branch if not equal
 
-ldp x20, x21, [sp], 16
+ldp x20, x21, [sp, 16]
 ldp x29, x30, [sp], 32
 ret
 
