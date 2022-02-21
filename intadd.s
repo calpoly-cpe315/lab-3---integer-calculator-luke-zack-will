@@ -5,8 +5,8 @@
 
 intadd:
 
-stp x20, x21, [sp, -16]
-stp x29, x30, [sp, -32] // probably can remove
+stp x20, x21, [sp, -16]!
+stp x29, x30, [sp, -32]! // probably can remove
 
 loop:
 
@@ -21,5 +21,6 @@ bne loop // branch if not equal
 
 ldp x20, x21, [sp, 16]
 ldp x29, x30, [sp], 32
+
 ret
 
