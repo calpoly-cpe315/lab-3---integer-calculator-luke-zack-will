@@ -16,7 +16,7 @@ intmul:
     cmp x2, #0
     beq zero // check if 0
 
-    mov, x23, x2 // how many times to add
+    mov x23, x2 // how many times to add
 
 loop:
     mov x1, x2 // set them equal for iteration of add
@@ -35,5 +35,5 @@ zero: // if zero fnc
 
 ldp x20, x21, [sp], 16
 ldp x22, x23, [sp], 32
-ldp x29, x30, [sp], 38
+ldp x29, x30, [sp], 48
 ret
