@@ -50,8 +50,8 @@ mainloop:
     b.eq doAdd
     b postAdd
 doAdd:
-    mov w0, w19
-    mov w1, w20
+    mov w1, w19
+    mov w2, w20
     bl intadd
     b calcsdone
 postAdd:
@@ -62,8 +62,8 @@ postAdd:
     b.eq doSub
     b postSub
 doSub:
-    mov w0, w19
-    mov w1, w20
+    mov w1, w19
+    mov w2, w20
     bl intsub
     b calcsdone
 postSub:
@@ -74,8 +74,8 @@ postSub:
     b.eq doMul
     b postMul
 doMul:
-    mov w0, w19
-    mov w1, w20
+    mov w1, w19
+    mov w2, w20
     bl intmul
     b calcsdone
 postMul:
@@ -87,7 +87,7 @@ postMul:
 
 calcsdone: //jumped to to skip the checks for next calculation
 //print result
-    mov w1, w0
+    mov w0, w0
     ldr w0, printdata + 12
     bl printf
 
