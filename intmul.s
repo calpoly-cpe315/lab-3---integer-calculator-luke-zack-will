@@ -21,42 +21,40 @@ intmul:
     cmp x1, #0
     blt neg // yum
     resume1:
-
-    mov x1, x0 // set them equal for the adding
+    mov x25, #0 // set them equal for the adding
 loop:
-
+    mov x0, x25
+    mov x1, x23
     bl intadd // addition fnc
     mov x25, x0 // x25 has result
+    //addition
     mov x0, x24 // set 0 to B counter
     mov x1, #1
     bl intsub
     mov x24, x0
-    mov x0, x25
-    mov x1, x23 //original value
+    //decrement B
 
-    cmp x24, #1 // one works, zero doesn't idk why
+    cmp x24, #0 // one works, zero doesn't idk why
     bne loop // if not loop
     b end
 
 zero: // if zero fnc
 
-    mov x0, #0
+    mov x25, #0
+    b end
 
-neg:  
-    mov x26, #1 //set flag for true
+neg:
+    mov x1, x23 //invert A
     mov x0, #0
     bl intsub
-    mov x1, x0
-    mov x0, x23
-    mov x1, x24
-    cmp x1, #0
-    bgt resume1
-    b resume2
+    mov x23, x0
+    mov x1, x24 //invert B
+    mov x0, #0
+    bl intsub
+    mov x24, x0
+    b resume1
 
 end:
-    cmp x26, #1
-    beq neg
-    resume2:
 
     mov x0, x25
     ldp x23, x24, [sp, 16]
