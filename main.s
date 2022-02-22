@@ -19,7 +19,7 @@ mainloop:
     ldr     x0, =scanint
     mov     x1, sp
     bl      scanf           // Scan user's answer
-    ldrb    x19, [sp]        // Put the user's value in w19
+    ldr    x19, [sp]        // Put the user's value in w19
 
     //start prompt for 2nd num
     ldr x0, printdata + 4
@@ -30,7 +30,7 @@ mainloop:
     ldr     x0, =scanint
     mov     x1, sp          // Save stack pointer to x1, you must create space
     bl      scanf           // Scan user's answer
-    ldrb    x20, [sp]       //num2 in w20
+    ldr    x20, [sp]       //num2 in w20
     //prompt for operation
 
     ldr x0, printdata + 8
@@ -46,7 +46,7 @@ mainloop:
  //do calculation, gonna have 4 diff beq's i assume
     //check if its addition
     ldr x1, =addition
-    ldrb x1, [x1] //load value to w1
+    ldrb w1, [x1] //load value to w1
     cmp x21, x1
     b.eq doAdd
     b postAdd
@@ -58,7 +58,7 @@ doAdd:
 postAdd:
     //check if sub
     ldr x1, =subtract
-    ldrb x1, [x1] //load value to w1
+    ldrb w1, [x1] //load value to w1
     cmp x21, x1
     b.eq doSub
     b postSub
@@ -70,7 +70,7 @@ doSub:
 postSub:
     //check if mul
     ldr x1, =multiply
-    ldrb x1, [x1] //load value to w1
+    ldrb w1, [x1] //load value to w1
     cmp x21, x1
     b.eq doMul
     b postMul
