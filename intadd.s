@@ -23,7 +23,7 @@ loop:
 
 mov x0, x19 // results of final eor, should be answer
 
-ld x19 [sp, 16]
+ldr x19 [sp, 16]
 ldp x20, x21, [sp, 32]
 ldp x29, x30, [sp], 48
 
