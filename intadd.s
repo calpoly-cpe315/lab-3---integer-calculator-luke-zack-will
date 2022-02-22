@@ -11,12 +11,14 @@ loop:
 
     eor x21, x1, x2 // xor, for digits left
 
-    mov x21, x0 // stores prev and, which is the result in the final iteration (magic)
+    mov x1, x21 // stores prev and also updates eor with new operation
     and x2, x1, x2 // and, for carry digits
     lsl x2, x2, #1 // logical shift left to move the carry 
 
     cmp x2, #0 // if there are carries
     bne loop // branch if not equal
+
+mov x0, x1 // give output reg result
 
 ldp x20, x21, [sp, 16]
 ldp x29, x30, [sp], 32
