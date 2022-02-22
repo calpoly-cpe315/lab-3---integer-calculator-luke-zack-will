@@ -6,34 +6,38 @@
 
 intmul:
 
-    stp x20, x21, [sp, -16]
-    stp x22, x23, [sp, -32]
-    stp x29, x30, [sp, -48]
+    stp x20, x21, [sp, -16]!
+    stp x22, x23, [sp, -32]!
+    stp x29, x30, [sp, -48]!
+
+    cmp x0, #0
+    beq zero // check if 0
 
     cmp x1, #0
     beq zero // check if 0
 
-    cmp x2, #0
-    beq zero // check if 0
+    mov x20, x0 // A, base value
+    mov x21, x1 // B, iterations of loop
 
-    mov x23, x2 // how many times to add
-
+    mov x1, x0 // set them equal for the adding
 loop:
-    mov x1, x2 // set them equal for iteration of add
     bl intadd // addition fnc
-    mov x22, x1 // orig in 22
-    mov x1, x23 // make x1 have iterations
-    mov x2, #1 // decrement by one
+    mov x22, x0 // x22 has result
+    mov x0, x21 // set 0 to B counter
+    mov x1, #1 // decrement
     bl intsub
+    mov x21, x0
+    mov x0, x22
+    mov x1, x20 //original value
 
-    cmp x23, #0 // is it done?
+    cmp x21, #0 // is it done?
     bne loop // if not loop
 
 zero: // if zero fnc
 
     mov x0, #0
 
-ldp x20, x21, [sp], 16
-ldp x22, x23, [sp], 32
+ldp x20, x21, [sp, 16]
+ldp x22, x23, [sp, 32]
 ldp x29, x30, [sp], 48
 ret
