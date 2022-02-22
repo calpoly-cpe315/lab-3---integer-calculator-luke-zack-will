@@ -18,7 +18,7 @@ loop:
     and x21, x19, x20 // and, for carry digits
     lsl x20, x21, #1 // make B contain carry, shift by 1
 
-    cmp x2, #0 // if there are carries
+    cmp x20, #0 // if there are carries
     bne loop // branch if not equal
 
 mov x0, x19 // results of final eor, should be answer
