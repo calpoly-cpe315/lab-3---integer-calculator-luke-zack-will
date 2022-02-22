@@ -24,15 +24,27 @@ loop:
     bl intadd // addition fnc
     mov x25, x0 // x25 has result
     mov x0, x24 // set 0 to B counter
-    mov x1, #1 // decrement
-    bl intsub
+    mov x1, #1
+    bgt dec // break if less than
+    blt inc // yum
+    resume:
     mov x24, x0
     mov x0, x25
     mov x1, x23 //original value
 
-    cmp x24, #0 // is it done?
+    cmp x24, #0 // one works, zero doesn't idk why
     bne loop // if not loop
     b end
+    
+dec:
+    bl intsub
+    b resume
+
+inc:
+    bl intadd
+    b resume
+
+
 zero: // if zero fnc
 
     mov x0, #0
