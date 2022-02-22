@@ -14,7 +14,7 @@ mainloop:
     //gonna loopback to here
 
     //start prompt for 1st num
-    ldr w0, printdata
+    ldr w0, =string1
     bl printf
     ldr     x0, =scanint
     mov     x1, sp
@@ -23,7 +23,7 @@ mainloop:
     mov x19, x0       // Put the user's value in w19
 
     //start prompt for 2nd num
-    ldr w0, printdata + 4
+    ldr w0, =string2
     bl printf
     ldr     x0, =scanint
     mov     x1, sp          // Save stack pointer to x1, you must create space
@@ -32,7 +32,7 @@ mainloop:
     mov x20, x0      //num2 in w20
 
     //prompt for operation
-    ldr w0, printdata + 8
+    ldr w0, =stringop
     bl printf
     ldr     x0, =scanchar
     mov     x1, sp          // Save stack pointer to x1, you must create space
@@ -84,7 +84,7 @@ calcsdone:
 
 prompt:
     //prompt again
-    ldr x0, printdata + 12
+    ldr x0, =again
     bl printf
 
 
@@ -124,12 +124,7 @@ end:
 
 
 
-printdata:
-    .word string1//+0
-    .word string2//+4
-    .word stringop//+8
-    .word again//+12
-    .word wrong//+26
+
 string1:
     .asciz "Enter Number 1: "
 string2:
