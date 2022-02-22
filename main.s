@@ -95,7 +95,7 @@ prompt:
     ldr     x1, =yes        // Put address of 'y' in x1
     ldrb    w1, [x1]        // Load the actual character 'y' into x1
     ldrb    w0, [sp]        // Put the user's value in r0
-    cmp     x0, x1          // Compare user's answer to char 'y'
+    cmp     w0, w1        // Compare user's answer to char 'y'
     //loopback if yes
     b.eq  mainloop
 
