@@ -12,101 +12,101 @@ main:
 mainloop:
     //gonna loopback to here
     //start prompt for 1st num
-    ldr w0, printdata
+    ldr x0, printdata
     bl printf
 
     //read 1st num
-    ldr     w0, =scanint
+    ldr     x0, =scanint
     mov     x1, sp
     bl      scanf           // Scan user's answer
-    ldrb    w19, [sp]        // Put the user's value in w19
+    ldrb    x19, [sp]        // Put the user's value in w19
 
     //start prompt for 2nd num
-    ldr w0, printdata + 4
+    ldr x0, printdata + 4
     bl printf
 
 
     //read 2nd num
-    ldr     w0, =scanint
+    ldr     x0, =scanint
     mov     x1, sp          // Save stack pointer to x1, you must create space
     bl      scanf           // Scan user's answer
-    ldrb    w20, [sp]       //num2 in w20
+    ldrb    x20, [sp]       //num2 in w20
     //prompt for operation
 
-    ldr w0, printdata + 8
+    ldr x0, printdata + 8
     bl printf
     //read operation
 
-    ldr     w0, =scanchar
+    ldr     x0, =scanchar
     mov     x1, sp          // Save stack pointer to x1, you must create space
     bl      scanf           // Scan user's answer
-    ldrb    w21, [sp]       //oper in w21
+    ldrb    x21, [sp]       //oper in w21
     //put both numbers into 2's comp form
 
  //do calculation, gonna have 4 diff beq's i assume
     //check if its addition
     ldr x1, =addition
-    ldrb w1, [x1] //load value to w1
-    cmp w21, w1
+    ldrb x1, [x1] //load value to w1
+    cmp x21, x1
     b.eq doAdd
     b postAdd
 doAdd:
-    mov w0, w19
-    mov w1, w20
+    mov x0, x19
+    mov x1, x20
     bl intadd
     b calcsdone
 postAdd:
     //check if sub
     ldr x1, =subtract
-    ldrb w1, [x1] //load value to w1
-    cmp w21, w1
+    ldrb x1, [x1] //load value to w1
+    cmp x21, x1
     b.eq doSub
     b postSub
 doSub:
-    mov w0, w19
-    mov w1, w20
+    mov x0, x19
+    mov x1, x20
     bl intsub
     b calcsdone
 postSub:
     //check if mul
     ldr x1, =multiply
-    ldrb w1, [x1] //load value to w1
-    cmp w21, w1
+    ldrb x1, [x1] //load value to w1
+    cmp x21, x1
     b.eq doMul
     b postMul
 doMul:
-    mov w0, w19
-    mov w1, w20
+    mov x0, x19
+    mov x1, x20
     bl intmul
     b calcsdone
 postMul:
     //print the invalid , and mvoe to prompt
-    ldr w0, printdata + 20
+    ldr x0, printdata + 20
     bl printf
     b prompt
 
 calcsdone: //jumped to to skip the checks for next calculation
 //print result
-    mov w0, w0
-    ldr w0, printdata + 12
+    mov x0, x0
+    ldr x0, printdata + 12
     bl printf
 
 
 
 prompt:
     //prompt again
-    ldr w0, printdata + 16
+    ldr x0, printdata + 16
     bl printf
 
 
     //read yes/no
-    ldr     w0, =scanchar
+    ldr     x0, =scanchar
     mov     x1, sp          // Save stack pointer to x1, you must create space
     bl      scanf           // Scan user's answer
     ldr     x1, =yes        // Put address of 'y' in x1
-    ldrb    w1, [x1]        // Load the actual character 'y' into x1
-    ldrb    w0, [sp]        // Put the user's value in r0
-    cmp     w0, w1          // Compare user's answer to char 'y'
+    ldrb    x1, [x1]        // Load the actual character 'y' into x1
+    ldrb    x0, [sp]        // Put the user's value in r0
+    cmp     x0, x1          // Compare user's answer to char 'y'
     //loopback if yes
     b.eq  mainloop
 
