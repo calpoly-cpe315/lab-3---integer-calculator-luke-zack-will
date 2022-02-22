@@ -6,7 +6,7 @@
 intmul:
 
     stp x23, x24, [sp, -16] // registers not used by other ints
-    stp x25, x26, [sp, -32]
+    stp x25, x26, [sp, -32] // 26 is negative flag for x1
     stp x29, x30, [sp, -48]!
 
     cmp x0, #0
@@ -18,6 +18,10 @@ intmul:
     mov x23, x0 // A, base value
     mov x24, x1 // B, iterations of loop
 
+    cmp x1, #0
+    blt neg // yum
+    resume1:
+
     mov x1, x0 // set them equal for the adding
 loop:
 
@@ -25,31 +29,35 @@ loop:
     mov x25, x0 // x25 has result
     mov x0, x24 // set 0 to B counter
     mov x1, #1
-    bgt dec // break if less than
-    blt inc // yum
-    resume:
+    bl intsub
     mov x24, x0
     mov x0, x25
     mov x1, x23 //original value
 
-    cmp x24, #0 // one works, zero doesn't idk why
+    cmp x24, #1 // one works, zero doesn't idk why
     bne loop // if not loop
     b end
-    
-dec:
-    bl intsub
-    b resume
-
-inc:
-    bl intadd
-    b resume
-
 
 zero: // if zero fnc
 
     mov x0, #0
 
+neg:  
+    mov x26, #1 //set flag for true
+    mvn x1, x1
+    mov x0, #1
+    bl intadd
+    mov x0, x1
+    mov x0, x23
+    cmp x1, #0
+    bgt resume1
+    b resume2
+
 end:
+    cmp x26, #1
+    beq neg
+    resume2:
+
     mov x0, x25
     ldp x23, x24, [sp, 16]
     ldp x25, x26, [sp, 32]
