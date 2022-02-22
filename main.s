@@ -1,5 +1,5 @@
     // Template main.s file for Lab 3
-    // partner names here
+    // Zack Soucek-Luke Rowe-William Woodward
 
     .arch armv8-a
 
