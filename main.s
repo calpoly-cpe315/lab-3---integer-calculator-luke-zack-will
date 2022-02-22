@@ -14,7 +14,7 @@ mainloop:
     //gonna loopback to here
 
     //start prompt for 1st num
-    ldr w0, =printdata
+    ldr w0, printdata
     bl printf
     ldr     x0, =scanint
     mov     x1, sp
@@ -23,7 +23,7 @@ mainloop:
     mov x19, x0       // Put the user's value in w19
 
     //start prompt for 2nd num
-    ldr x0, =printdata + 4
+    ldr x0, printdata + 4
     bl printf
     ldr     x0, =scanint
     mov     x1, sp          // Save stack pointer to x1, you must create space
@@ -32,7 +32,7 @@ mainloop:
     mov x20, x0      //num2 in w20
 
     //prompt for operation
-    ldr x0, =printdata + 8
+    ldr x0, printdata + 8
     bl printf
     ldr     x0, =scanchar
     mov     x1, sp          // Save stack pointer to x1, you must create space
