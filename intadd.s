@@ -13,9 +13,10 @@ intadd:
 
 loop:
 
+    and x21, x19, x20 // and, for carry digits
+    
     eor x19, x19, x20 // xor, contains final result once no carry
 
-    and x21, x19, x20 // and, for carry digits
     lsl x20, x21, #1 // make B contain carry, shift by 1
 
     cmp x20, #0 // if there are carries

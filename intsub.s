@@ -3,27 +3,29 @@
     .arch armv8-a
     .global intsub
 
-intsub:
+intadd:
+    str x19, [sp, -16]!
+    stp x20, x21, [sp, -32]!
+    stp x29, x30, [sp, -48]! // store FP
 
-    str x20, [sp, -8]
-    stp x29, x30, [sp, -24]
+    mov x19, x0 // stores A
+    mov x20, x1 // stores B
 
-    mov x20, x0 // move argument 0 to storage
+loop:
 
-    mvn x0, x1 // invert bits
-    mov x1, #1 // adding one to the inverted
+    eor x19, x19, x20 // xor, before and, inverts bits
 
-    bl intadd // add
+    and x21, x19, x20 // and, for carry digits
+    lsl x20, x21, #1 // make B contain carry, shift by 1
 
-    mov x1, x0 // set intadd result to A
-    mov x0, x20 // retireve argumetn 0
+    cmp x20, #0 // if there are carries
+    bne loop // branch if not equal
 
-    bl intadd // add them
+mov x0, x19 // results of final eor
+ldr x19, [sp, 16] // load x19
 
-    //answer should be correct rn
+ldp x20, x21, [sp, 32] // load x20, x21
+ldp x29, x30, [sp], 48 // load FP
 
-    ldp x20, x21, [sp], 8
-    ldp x29, x30, [sp], 24
-
-    ret
+ret
 
