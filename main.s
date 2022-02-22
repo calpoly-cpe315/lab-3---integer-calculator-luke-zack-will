@@ -87,7 +87,7 @@ postMul:
 
 calcsdone: //jumped to to skip the checks for next calculation
 //print result
-    mov x0, x0
+    mov x1, x0
     ldr x0, printdata + 12
     bl printf
 
@@ -104,8 +104,8 @@ prompt:
     mov     x1, sp          // Save stack pointer to x1, you must create space
     bl      scanf           // Scan user's answer
     ldr     x1, =yes        // Put address of 'y' in x1
-    ldrb    x1, [x1]        // Load the actual character 'y' into x1
-    ldrb    x0, [sp]        // Put the user's value in r0
+    ldrb    w1, [x1]        // Load the actual character 'y' into x1
+    ldrb    w0, [sp]        // Put the user's value in r0
     cmp     x0, x1          // Compare user's answer to char 'y'
     //loopback if yes
     b.eq  mainloop
