@@ -23,7 +23,7 @@ mainloop:
     mov x19, x0       // Put the user's value in w19
 
     //start prompt for 2nd num
-    ldr x0, printdata + 4
+    ldr w0, printdata + 4
     bl printf
     ldr     x0, =scanint
     mov     x1, sp          // Save stack pointer to x1, you must create space
@@ -32,7 +32,7 @@ mainloop:
     mov x20, x0      //num2 in w20
 
     //prompt for operation
-    ldr x0, printdata + 8
+    ldr w0, printdata + 8
     bl printf
     ldr     x0, =scanchar
     mov     x1, sp          // Save stack pointer to x1, you must create space
@@ -58,10 +58,8 @@ mainloop:
     ldrb w3, [x3] //load value to w3
     cmp w2, w3
     b.eq doMul
-
-invalid:
     //print the invalid , and mvoe to prompt
-    ldr x0, printdata + 20
+    ldr w0, printdata + 16
     bl printf
     b prompt
 
@@ -75,17 +73,18 @@ doMul:
     bl intmul
     b calcsdone
 
-calcsdone: //jumped to to skip the checks for next calculation
+calcsdone:
 //print result
     mov x1, x0
-    ldr x0, printdata + 12
+    ldr x0, =stringresult
     bl printf
 
 
+    b prompt
 
 prompt:
     //prompt again
-    ldr x0, printdata + 16
+    ldr x0, printdata + 12
     bl printf
 
 
@@ -129,9 +128,8 @@ printdata:
     .word string1//+0
     .word string2//+4
     .word stringop//+8
-    .word stringresult//+12
-    .word again//+16
-    .word wrong//+20
+    .word again//+12
+    .word wrong//+26
 string1:
     .asciz "Enter Number 1: "
 string2:
