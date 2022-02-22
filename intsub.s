@@ -3,7 +3,7 @@
     .arch armv8-a
     .global intsub
 
-intadd:
+intsub:
 
     str x20, [sp, -8]
     stp x29, x30, [sp, -24]
