@@ -8,22 +8,20 @@ intadd:
     stp x20, x21, [sp, -32]!
     stp x29, x30, [sp, -48]! // probably can remove
 
-    mov x19, x1 // restores A
-    mov x20, x2 // restores B
+    mov x19, x0 // stores A
+    mov x20, x1 // stores B
 
 loop:
 
-    eor x21, x1, x2 // xor, for digits left
+    eor x19, x19, x20 // xor, for digits left
 
-    and x1, x1, x2 // and, for carry digits
-    lsl x2, x2, #1 // logical shift left to move the carry
+    and x21, x19, x20 // and, for carry digits
+    lsl x20, x20, #1 // logical shift left to move the carry
 
     cmp x2, #0 // if there are carries
     bne loop // branch if not equal
 
-mov x0, x21 // give output reg result
-mov x1, x19 // restore for other fncs
-mov x2, x20
+mov x0, x19 // results of final eor, should be answer
 
 ldp x20, x21, [sp, 16]
 ldp x29, x30, [sp], 32
