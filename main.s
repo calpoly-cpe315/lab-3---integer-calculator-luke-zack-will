@@ -59,7 +59,7 @@ mainloop:
     cmp w2, w3
     b.eq doMul
     //print the invalid , and mvoe to prompt
-    ldr w0, printdata + 16
+    ldr w0, =wrong
     bl printf
     b prompt
 
