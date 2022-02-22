@@ -50,8 +50,8 @@ mainloop:
     b.eq doAdd
     b postAdd
 doAdd:
-    mov w1, w19
-    mov w2, w20
+    mov w0, w19
+    mov w1, w20
     bl intadd
     b calcsdone
 postAdd:
@@ -62,8 +62,8 @@ postAdd:
     b.eq doSub
     b postSub
 doSub:
-    mov w1, w19
-    mov w2, w20
+    mov w0, w19
+    mov w1, w20
     bl intsub
     b calcsdone
 postSub:
@@ -74,15 +74,14 @@ postSub:
     b.eq doMul
     b postMul
 doMul:
-    mov w1, w19
-    mov w2, w20
+    mov w0, w19
+    mov w1, w20
     bl intmul
     b calcsdone
 postMul:
     //print the invalid , and mvoe to prompt
     ldr w0, printdata + 20
     bl printf
-
     b prompt
 
 calcsdone: //jumped to to skip the checks for next calculation
