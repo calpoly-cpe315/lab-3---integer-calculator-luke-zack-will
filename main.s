@@ -9,81 +9,71 @@ main:
     // driver function main lives here, modify this for your other functions
     stp x29, x30, [sp, -32]!
     mov x29, sp
+    stp x19, x20, [sp, 16]
 mainloop:
     //gonna loopback to here
-    //start prompt for 1st num
-    ldr x0, printdata
-    bl printf
 
-    //read 1st num
+    //start prompt for 1st num
+    ldr w0, printdata
+    bl printf
     ldr     x0, =scanint
     mov     x1, sp
     bl      scanf           // Scan user's answer
-    ldr    x19, [sp]        // Put the user's value in w19
+    ldr    x0, [sp]
+    mov x19, x0       // Put the user's value in w19
 
     //start prompt for 2nd num
     ldr x0, printdata + 4
     bl printf
-
-
-    //read 2nd num
     ldr     x0, =scanint
     mov     x1, sp          // Save stack pointer to x1, you must create space
     bl      scanf           // Scan user's answer
-    ldr    x20, [sp]       //num2 in w20
-    //prompt for operation
+    ldr    x0, [sp]
+    mov x20, x0      //num2 in w20
 
+    //prompt for operation
     ldr x0, printdata + 8
     bl printf
-    //read operation
-
     ldr     x0, =scanchar
     mov     x1, sp          // Save stack pointer to x1, you must create space
     bl      scanf           // Scan user's answer
-    ldrb    w21, [sp]       //oper in w21
-    //put both numbers into 2's comp form
+    ldrb    w2, [sp]       //user oper in w2
 
- //do calculation, gonna have 4 diff beq's i assume
+    //do calcultion, gonna have 4 diff beq's i assume
+    mov x0, x19
+    mov x1, x20
+    //FROM THIS poitn on, X0/1 have the user inputted math inputs
     //check if its addition
-    ldr x1, =addition
-    ldrb w1, [x1] //load value to w1
-    cmp x21, x1
+    ldr x3, =addition
+    ldrb w3, [x3] //load value to w3
+    cmp w2, w3
     b.eq doAdd
-    b postAdd
-doAdd:
-    mov x0, x19
-    mov x1, x20
-    bl intadd
-    b calcsdone
-postAdd:
     //check if sub
-    ldr x1, =subtract
-    ldrb w1, [x1] //load value to w1
-    cmp x21, x1
+    ldr x3, =subtract
+    ldrb w3, [x3] //load value to w3
+    cmp w2, w3
     b.eq doSub
-    b postSub
-doSub:
-    mov x0, x19
-    mov x1, x20
-    bl intsub
-    b calcsdone
-postSub:
     //check if mul
-    ldr x1, =multiply
-    ldrb w1, [x1] //load value to w1
-    cmp x21, x1
+    ldr x3, =multiply
+    ldrb w3, [x3] //load value to w3
+    cmp w2, w3
     b.eq doMul
-    b postMul
-doMul:
-    mov x0, x19
-    mov x1, x20
-    bl intmul
-    b calcsdone
-postMul:
+
+invalid:
     //print the invalid , and mvoe to prompt
     ldr x0, printdata + 20
     bl printf
     b prompt
+
+doAdd:
+    bl intadd
+    b calcsdone
+doSub:
+    bl intsub
+    b calcsdone
+doMul:
+    bl intmul
+    b calcsdone
 
 calcsdone: //jumped to to skip the checks for next calculation
 //print result
@@ -110,8 +100,8 @@ prompt:
     //loopback if yes
     b.eq  mainloop
 
+    b end
     //done
-    ret
 
         // You'll need to scan characters for the operation and to determine
     // if the program should repeat.
@@ -127,6 +117,9 @@ prompt:
         b       loop            // branch to appropriate location
     */
 end:
+    ldp x19, x20, [sp, 16]
+    ldp x29, x30, [sp], 32
+    ret
 
 
 
