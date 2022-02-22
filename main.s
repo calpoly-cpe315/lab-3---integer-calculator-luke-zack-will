@@ -110,6 +110,9 @@ prompt:
     //loopback if yes
     b.eq  mainloop
 
+    //done
+    ret
+
 
 
 
