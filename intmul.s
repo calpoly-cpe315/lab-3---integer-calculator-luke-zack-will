@@ -1,12 +1,12 @@
     // intmul function in this file
-   
+
     .arch armv8-a
     .global intmul
 
 intmul:
 
-    stp x23, x24, [sp, -16]! // registers not used by other ints
-    stp x25, x26, [sp, -32]!
+    stp x23, x24, [sp, -16] // registers not used by other ints
+    stp x25, x26, [sp, -32]
     stp x29, x30, [sp, -48]!
 
     cmp x0, #0
@@ -20,7 +20,7 @@ intmul:
 
     mov x1, x0 // set them equal for the adding
 loop:
- 
+
     bl intadd // addition fnc
     mov x25, x0 // x25 has result
     mov x0, x24 // set 0 to B counter

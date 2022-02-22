@@ -4,8 +4,8 @@
     .global intsub
 
 intsub:
-    str x19, [sp, -16]!
-    stp x20, x21, [sp, -32]!
+    str x19, [sp, -16]
+    stp x20, x21, [sp, -32]
     stp x29, x30, [sp, -48]! // store FP
 
     mov x19, x0 // stores A

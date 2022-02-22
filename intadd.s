@@ -4,8 +4,8 @@
     .global intadd
 
 intadd:
-    str x19, [sp, -16]!
-    stp x20, x21, [sp, -32]!
+    str x19, [sp, -16]
+    stp x20, x21, [sp, -32]
     stp x29, x30, [sp, -48]! // store FP
 
     mov x19, x0 // stores A
@@ -14,7 +14,7 @@ intadd:
 loop:
 
     and x21, x19, x20 // and, for carry digits
-    
+
     eor x19, x19, x20 // xor, contains final result once no carry
 
     lsl x20, x21, #1 // make B contain carry, shift by 1
