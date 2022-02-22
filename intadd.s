@@ -16,7 +16,7 @@ loop:
     eor x19, x19, x20 // xor, for digits left
 
     and x21, x19, x20 // and, for carry digits
-    lsl x20, x20, #1 // logical shift left to move the carry
+    lsl x20, x21, #1 // make B contain carry, shift by 1
 
     cmp x2, #0 // if there are carries
     bne loop // branch if not equal
