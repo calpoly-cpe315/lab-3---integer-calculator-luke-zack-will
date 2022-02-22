@@ -44,11 +44,11 @@ zero: // if zero fnc
 
 neg:  
     mov x26, #1 //set flag for true
-    mvn x1, x1
-    mov x0, #1
-    bl intadd
-    mov x0, x1
+    mov x0, #0
+    bl intsub
+    mov x1, x0
     mov x0, x23
+    mov x1, x24
     cmp x1, #0
     bgt resume1
     b resume2
