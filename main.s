@@ -112,15 +112,11 @@ prompt:
 
     //done
     ret
-end:
 
-
-
-
-    // You'll need to scan characters for the operation and to determine
+        // You'll need to scan characters for the operation and to determine
     // if the program should repeat.
     // To scan a character, and compare it to another, do the following
-/*
+    /*
     loop: ldr     w0, =scanchar
         mov     x1, sp          // Save stack pointer to x1, you must create space
         bl      scanf           // Scan user's answer
@@ -129,7 +125,13 @@ end:
         ldrb    w0, [sp]        // Put the user's value in r0
         cmp     w0, w1          // Compare user's answer to char 'y'
         b       loop            // branch to appropriate location
-*/
+    */
+end:
+
+
+
+
+
 printdata:
     .word string1//+0
     .word string2//+4
