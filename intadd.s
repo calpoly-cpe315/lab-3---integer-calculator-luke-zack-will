@@ -18,6 +18,7 @@ loop:
     cmp x2, #0 // if there are carries
     bne loop // branch if not equal
 
+mov x0, x20 // move result to resltant x
 ldp x20, x21, [sp, 16]
 ldp x29, x30, [sp], 32
 
