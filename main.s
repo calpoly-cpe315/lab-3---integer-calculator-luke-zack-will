@@ -41,6 +41,7 @@ mainloop:
     mov     x1, sp          // Save stack pointer to x1, you must create space
     bl      scanf           // Scan user's answer
     ldrb    w21, [sp]       //oper in w21
+    //put both numbers into 2's comp form
 
  //do calculation, gonna have 4 diff beq's i assume
     //check if its addition

@@ -10,8 +10,8 @@ intsub:
 
     mov x20, x0 // move argument 0 to storage
 
-    mvn x0, x1 // make it two complement
-    mov x1, #1 // adding one to the complement
+    mvn x0, x1 // invert bits
+    mov x1, #1 // adding one to the inverted
 
     bl intadd // add
 
