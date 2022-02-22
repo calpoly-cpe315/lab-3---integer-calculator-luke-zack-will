@@ -3,7 +3,7 @@
     .arch armv8-a
     .global intsub
 
-intadd:
+intsub:
     str x19, [sp, -16]!
     stp x20, x21, [sp, -32]!
     stp x29, x30, [sp, -48]! // store FP
