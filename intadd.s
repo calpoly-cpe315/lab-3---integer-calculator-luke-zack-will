@@ -22,9 +22,9 @@ loop:
     bne loop // branch if not equal
 
 mov x0, x19 // results of final eor, should be answer
-
-ldp x20, x21, [sp, 16]
-ldp x29, x30, [sp], 32
+ ldr x19, [sp, 16]
+ldp x20, x21, [sp, 32]
+ldp x29, x30, [sp], 48
 
 ret
 
